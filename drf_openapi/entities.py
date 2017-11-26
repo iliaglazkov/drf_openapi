@@ -192,10 +192,13 @@ class OpenApiSchemaGenerator(SchemaGenerator):
         response_schema, error_status_codes = self.get_response_object(
             response_serializer_class, method_func.__doc__) if response_serializer_class else ({}, {})
 
+        url = path
+        if self.version:
+            url = path.replace('{version}', self.version)  # can't use format because there may be other param
         return OpenApiLink(
             response_schema=response_schema,
             error_status_codes=error_status_codes,
-            url=path.replace('{version}', self.version),  # can't use format because there may be other param
+            url=url,
             action=method.lower(),
             encoding=encoding,
             fields=fields,

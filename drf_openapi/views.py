@@ -13,7 +13,7 @@ class SchemaView(APIView):
     url = ''
     title = 'API Documentation'
 
-    def get(self, request, version):
+    def get(self, request, version=''):
         generator = OpenApiSchemaGenerator(
             version=version,
             url=self.url,

@@ -47,7 +47,7 @@ This project was born to bridge the gap between DRF and OpenAPI. The high-level 
 
 - Can be dropped into any existing DRF project without any code change necessary.
 - Provide clear disctinction between request schema and response schema.
-- Provide a versioning mechanism for each schema. Support defining schema by version range syntax, e.g. :code:`>1.0, <=2.0`
+- If desired, provide a versioning mechanism for each schema. Support defining schema by version range syntax, e.g. :code:`>1.0, <=2.0`
 - Support multiple response codes, not just :code:`200`
 - All this information should be bound to view methods, not view classes.
 
@@ -67,8 +67,8 @@ DRF itself decides to support OpenAPI officially, if at all.
 4. Constraints
 ----------------
 
-Currently DRF OpenAPI only supports DRF project that has `versioning <http://www.django-rest-framework.org/api-guide/versioning/#urlpathversioning>`_ enabled.
-I have only tested `URLPathVersioning <http://www.django-rest-framework.org/api-guide/versioning/#urlpathversioning>`_ but I intend to suppor the full range of
+DRF OpenAPI supports DRF projects both with and without `versioning <http://www.django-rest-framework.org/api-guide/versioning/#urlpathversioning>`_ enabled.
+That said, I have only tested `URLPathVersioning <http://www.django-rest-framework.org/api-guide/versioning/#urlpathversioning>`_ but I intend to support the full range of
 versioning scheme supported by DRF.
 
 5. Examples
