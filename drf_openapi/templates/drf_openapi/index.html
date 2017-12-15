@@ -18,7 +18,7 @@
 </head>
 <body>
     <script>
-        var url = window.location.pathname + '?format=openapi';
+        var url = window.location.protocol + "//" + window.location.host + window.location.pathname + '?format=openapi';
         var redoc = document.createElement("redoc");
         redoc.setAttribute("spec-url", url);
         document.body.appendChild(redoc);
