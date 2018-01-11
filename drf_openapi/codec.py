@@ -41,19 +41,7 @@ class OpenApiFieldParser:
         if items_type == 'object':
             parameter['items'] = {
                 'type': items_type,
-                'properties': {
-                    name: {
-                        'description': _get_field_description(prop),
-                        'type': _get_field_type(prop),
-                        'properties': {
-                            name2: {
-                                'description': _get_field_description(prop2),
-                                'type': _get_field_type(prop2),
-                            } for name2, prop2 in getattr(
-                                prop, 'properties', {}).items()
-                        }
-                    } for name, prop in self.field.schema.items.properties.items()
-                }
+                'properties': self._parse_nested_items(self.field.schema.items),
             }
         else:
             parameter['items'] = {
@@ -62,6 +50,17 @@ class OpenApiFieldParser:
             }
 
         return parameter
+
+    def _parse_nested_items(self, items):
+        return {
+            name: {
+                'description': _get_field_description(prop),
+                'type': _get_field_type(prop),
+                'properties':
+                    self._parse_nested_items(prop)
+                    if hasattr(prop, 'properties') else None
+            } for name, prop in items.properties.items()
+        }
 
     def as_parameter(self):
         if self.field_type == 'array':
