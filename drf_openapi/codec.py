@@ -44,7 +44,14 @@ class OpenApiFieldParser:
                 'properties': {
                     name: {
                         'description': _get_field_description(prop),
-                        'type': _get_field_type(prop)
+                        'type': _get_field_type(prop),
+                        'properties': {
+                            name2: {
+                                'description': _get_field_description(prop2),
+                                'type': _get_field_type(prop2),
+                            } for name2, prop2 in getattr(
+                                prop, 'properties', {}).items()
+                        }
                     } for name, prop in self.field.schema.items.properties.items()
                 }
             }
